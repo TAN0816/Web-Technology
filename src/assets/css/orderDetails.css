@@ -1,0 +1,134 @@
+.orderDetailsContainer{
+    margin: 50px;
+}
+
+.orderDetailsTitle {
+    display: flex;
+}
+.orderDetailsTitle h1{
+    font-size: 30px;
+}
+.orderDetailsTitle a{
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+    cursor: pointer;
+}
+.orderDetailsTitle img{
+    width: 20px;
+}
+.updateOption{
+    text-align: right;
+    margin: 10px 0 20px 0;
+}
+.updateOption .edit-btn{
+    background-color: rgb(106, 252, 208);
+    border-radius: 20px;
+    padding: 10px 20px;
+    box-shadow: 3px 3px 4px rgb(214, 214, 214);
+}
+.updateOption .edit-btn:hover{
+    background-color: rgb(114, 235, 198);
+}
+.updateOption .edit-btn a{
+    color: black;
+    text-decoration: none;
+}
+.orderContent{
+    display: flex;
+}
+.updateForm{
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    padding: 0 30px 0 0;
+    border-right: black 1px solid;
+    height: 80vh;
+}
+.updateForm label:not(:first-child){
+    margin-top: 20px;
+}
+
+.updateForm input, .updateForm select{
+    padding: 5px;
+    color:black;
+}
+
+.submit-btn{
+    margin-top: 40px;
+    background-color: rgb(185, 255, 255);
+    box-shadow: 3px 3px 4px rgb(204, 204, 204);
+    border: none;
+    border-radius: 20px;
+    width: 100px;
+    height: 40px;
+    margin: 50px auto;
+}
+
+.submit-btn:hover{
+    background-color: rgb(161, 236, 236);
+}
+
+.orderDetails{
+    width: 75%;
+    margin: 0 0 0 30px;
+}
+.orderDetailsTable,
+.orderDetailsTable th,
+.orderDetailsTable td{
+    border: rgb(165, 174, 255) 1px solid;
+    border-spacing: 0;
+    text-align: center;
+}
+.orderDetailsTable th{
+    padding: 10px;
+    background-color: rgb(222, 222, 254);
+}
+
+.orderDetailsTable td{
+    padding: 10px;
+    background-color: rgb(255, 255, 255);
+}
+
+.orderDetailsTable{
+    width: 100%;
+}
+
+.osummary{
+    text-align: right;
+    display: flex;
+    justify-content: space-between;
+}
+
+.error{
+    border: rgb(250, 145, 145) solid 2px;
+    background-color: rgb(251, 161, 161);
+}
+
+.success{
+    border: rgb(171, 255, 171) solid 2px;
+    background-color: rgb(195, 255, 202);
+}
+
+.success, .error{
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    padding: 10px;
+    width: fit-content;
+    margin-left: 50px;
+    position: fixed;
+    animation: deleteAnimation 3s linear forwards;;
+    animation-fill-mode: forwards;
+}
+@keyframes deleteAnimation {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        display: none;
+    }
+  }
+
+.success img, .error img{
+    margin-right: 10px;
+}

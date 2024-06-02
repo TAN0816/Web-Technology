@@ -1,0 +1,43 @@
+.addMenuForm, .editMenuForm{
+    width: 500px;
+    background-color: #e4eeff;
+    border-radius: 10px;
+    padding: 30px 20px;
+    margin: 30px auto;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.form-content h1{
+    padding: 0 10px;
+    margin-top: 0;
+    font-size: 30px;
+}
+
+.form-content td{
+    padding: 20px 10px;
+    vertical-align: top;
+}
+
+.form-content input[type="text"], 
+.form-content input[type="number"], 
+.form-content textarea{
+    border: none;
+    box-shadow: 2px 5px 10px #bebebe;
+    padding: 10px;
+    width: 350px;
+}
+
+.submitbtnStyle{
+    text-align: center;
+}
+
+.submitbtn{
+    border-radius: 20px;
+    padding: 10px 20px;
+    border: none;
+    background-color: rgb(141, 208, 252);
+}
+
+.submitbtn:hover{
+    cursor: pointer;
+    background-color: rgb(119, 183, 226);
+}

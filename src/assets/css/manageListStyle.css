@@ -1,0 +1,130 @@
+.menuMContainer, .orderMContainer, .userMContainer{
+    margin: 50px;
+}
+.addmenu{
+    text-align: end;
+    margin-bottom: 10px;
+}
+.addmenu .add img{
+    width: 25px;
+}
+.title{
+    font-size: 35px;
+    text-align: center;
+}
+table{
+    border-spacing: 0;
+    text-align: center;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+td{
+    border-top: rgb(205, 208, 218) solid 1px;
+    padding: 10px;
+}
+
+table{
+    width: 100%;
+    border-radius: 10px;
+}
+
+th{
+    background-color: #dbe7fe;
+    padding: 10px;
+}
+
+th:first-child{
+    border-top-left-radius: 10px;
+    padding-left: 20px;
+}
+th:last-child{
+    border-top-right-radius: 10px;
+    padding-right: 20px;
+}
+
+/*order management page*/
+.tool{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.edit, .delete{
+    padding: 0 10px;
+}
+.view{
+    padding: 15px 0;
+}
+
+.edit a, .delete a, .view a{
+    text-decoration: none;
+    color: black;
+}
+
+
+.edit-btn{
+    border-radius: 15px;
+    background-color: rgb(121, 255, 246);
+    padding: 5px 18px;
+    box-shadow: 3px 4px 4px rgb(199, 199, 199);
+}
+
+.edit-btn:hover{
+    background-color: rgb(121, 219, 255);
+}
+
+.delete-btn{
+    border-radius: 15px;
+    background-color: rgb(255, 142, 142);
+    padding: 5px 10px;
+    box-shadow: 3px 4px 4px rgb(192, 192, 192);
+}
+
+.delete-btn:hover{
+    background-color: rgb(245, 131, 131);
+}
+
+.view-btn{
+    border-radius: 15px;
+    background-color: rgb(97, 255, 189);
+    padding: 5px 18px;
+    box-shadow: 3px 4px 4px rgb(199, 199, 199);
+    margin: 5px 0;
+}
+
+.view-btn:hover{
+    background-color: rgb(92, 241, 179);
+}
+
+.error{
+    border: rgb(250, 145, 145) solid 2px;
+    background-color: rgb(251, 161, 161);
+}
+
+.success{
+    border: rgb(171, 255, 171) solid 2px;
+    background-color: rgb(195, 255, 202);
+}
+
+.success, .error{
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    padding: 10px;
+    width: fit-content;
+    margin-left: 50px;
+    position: fixed;
+    animation: deleteAnimation 3s linear forwards;;
+    animation-fill-mode: forwards;
+}
+@keyframes deleteAnimation {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        display: none;
+    }
+  }
+
+.success img, .error img{
+    margin-right: 10px;
+}

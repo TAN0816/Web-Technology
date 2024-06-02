@@ -1,0 +1,314 @@
+body{
+  background-color: #F3F3F3;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+.page {
+  margin-top: 100px;
+  display: flex;
+  flex-direction: row;
+  max-width: 100vw;
+  
+  
+}
+
+.card{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+
+.menulist{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.menu-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 36px;
+  text-align: center;
+  color: rgb(7, 7, 24);
+ /* text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.502);*/
+  letter-spacing: 2px;
+  margin:25px;
+}
+
+.cart-title{
+  font-family: 'Poppins', sans-serif;
+  font-size: 22px;
+  color: rgb(7, 7, 24);
+  text-align: center;
+ /* text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.502);*/
+  letter-spacing: 2px;
+  margin:30px 25px 45px 25px;
+}
+
+.container {
+  width: 66vw;
+  margin:10px 25px 25px 45px;
+  background-color: white;
+  border-radius: 15px;
+}
+
+.container2 {
+  width: 34vw;
+  margin:10px 25px 25px 10px;
+  background-color: white;
+  border-radius: 15px;
+}
+
+.cartempty{
+  margin-top: 70px;
+  height: 650px;
+}
+
+
+.cartemptyimage{
+  width:150px;
+  height:auto;
+
+}
+
+.cartemptycontent{
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  padding: 20px 30px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.cartempty h3{
+  margin-top: 45px;
+}
+
+.menu {
+  margin: 20px 30px;
+  border-radius: 15px;
+  border: 2px solid #EAEAEA;
+  position: relative;
+  color: black;
+  width: 220px;
+  height: auto;
+  font-family: 'Lato', sans-serif;
+  padding: 20px;
+  background-color: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+}
+
+.rounded-image {
+  border-radius: 15px;
+  width: 180px;
+  height: 180px;
+}
+
+
+.description {
+  border-radius: 15px;
+  border: 2px solid #EAEAEA;
+  width: 220px;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 10px 25px;
+  background-color: rgba(255, 243, 221, 0.968);
+  color: #800000;;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.3s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+   
+  
+}
+.description p{
+  line-height: 20px;
+  font-family: "Calisto MT", serif;
+  font-size: 16x;
+  font-style: italic;
+  font-weight: 800;
+}
+.hoverr:hover .description {
+  opacity: 1;
+  visibility: visible;
+}
+
+#pricep{
+  color: #FF3131;
+  font-style: italic;
+}
+.cart {
+  height: 50px;
+  width: 50px;
+  padding: 10px;
+  border: none;
+}
+
+.addcartbutton {
+  z-index: 99;
+  border: none;
+  background-color: #AF4848;
+  border-radius: 50%;
+  position: absolute;
+  bottom: -10px;
+  right: -10px;
+  height: 50px;
+  width: 50px;
+  cursor: pointer;
+}
+.addcartbutton :hover{
+  z-index: 99;
+  border: none;
+  background-color: #EF601E;
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+  cursor: pointer;
+}
+
+.h3margintop {
+  margin-top: 30px;
+  font-size: 16px;
+}
+
+.price {
+  margin-top: 10px;
+  color: #333333;
+}
+
+.cartcheckbox,
+.cartcheckbox {
+  width: 15px;
+  height: 15px;
+}
+
+.item {
+  display: flex;
+  flex-direction: row;
+  margin:20px;
+}
+
+.col1,
+.col2,
+.col3,
+.col4 {
+  display: flex;
+  align-items: center;
+}
+
+.col1 {
+  width: 12%;
+  justify-content: center;
+}
+
+.col2 {
+  width: 25%;
+  justify-content: center;
+}
+
+.col3 {
+  width: 63%;
+}
+
+
+.col3description {
+  padding-left: 30px;
+}
+
+.quantityinput {
+  width: 25px;
+  height: 30px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  text-align: center;
+}
+
+.cartimg {
+  height: 70px;
+  width: 100px;
+  border-radius: 5%;
+}
+
+.content {
+  border-radius: 10px;
+  font-family: 'Poppins', sans-serif;
+  width: 100%;
+}
+
+.totalcart {
+  display: flex;
+  flex-direction: row;
+  margin:20px;
+  
+}
+
+.totalcol1,
+.totalcol3,
+.totalcol4 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.totalcol1 {
+  width: 12%;
+}
+
+.totalcol2 {
+  width: 48%;
+  display: flex;
+  align-items: center;
+}
+
+.totalcol3 {
+  width: 15%;
+  color: #FF3131;
+}
+
+
+
+.totalcol4 {
+  width: 22%;
+}
+
+.buttoncheckout {
+  display: flex;
+  justify-content: flex-end;
+  margin: 0 0 50px 0;
+}
+
+hr {
+  margin: 30px 40px;
+  border-top: 1px groove #b3b5bb;
+}
+
+.buttoncheckout .buttonn {
+  background-color: #EF601E;
+  border: none;
+  padding: 10px 15px;
+  color: white;
+  font-size: 16px;
+  border-radius: 25px;
+  margin-right: 25px;
+}
+
+

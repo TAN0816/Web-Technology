@@ -1,0 +1,152 @@
+
+.content{
+background-color: #FDF3DD;
+margin:100px;
+border-radius: 10px;
+font-family: 'Poppins', sans-serif;
+}
+
+.content2{
+    padding:40px 20px;
+}
+
+
+.cartimg {
+  height: 150px;
+  width: auto;
+  border-radius: 5%;
+}
+
+.total {
+  height: 100px;
+}
+
+
+.cartcheckbox {
+  width: 20px;
+  height: 20px;
+}
+
+.item {
+    height: 200px;
+  display: flex;
+  flex-direction: row;
+}
+
+.col1,
+.col2,
+.col4,
+.col5 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.col1 {
+  width: 10%;
+}
+
+.col2 {
+  width: 15%;
+}
+
+.col3 {
+  width: 40%;
+}
+.col4 {
+  width: 15%;
+}
+
+.col5 {
+  width: 15%;
+  
+}
+
+.total{
+    display:flex;
+    flex-direction: row;
+}
+
+.totalcol1,
+
+.totalcol3,
+.totalcol4 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+
+.totalcol1 {
+  width: 10%;
+}
+
+.totalcol2 {
+    display: flex;
+    align-items: center;
+  width: 55%;
+}
+
+.totalcol3 {
+  width: 15%;
+  color:#FF3131;
+}
+.totalcol4 {
+  width: 15%;
+}
+
+.comment {
+  line-height: 2px;
+  color: #847f73;
+}
+.description {
+  padding-left: 30px;
+  padding-top: 30px;
+  color:#000080;
+}
+
+.col4 h2 {
+  margin: 0 20px;
+}
+
+hr {
+  margin: 20px 40px;
+  border-top: 1px groove #b3b5bb;
+}
+
+
+.buttoncheckout{
+    display: flex;
+    justify-content:flex-end;
+}
+
+.buttoncheckout .buttonn{
+    background-color: #EF601E;
+    border:none;
+    padding:10px 15px;
+    color:white;
+    font-size: 16px;
+    border-radius: 25px;
+    margin-right:100px;
+}
+
+.quantitybutton{
+  background-color: transparent;
+  border: none;
+}
+
+.quantitybutton:hover {
+  background-color: lightgray;
+  border:grey;
+}
+
+.quantityinput {
+  width: 20px;
+  height: 30px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  text-align: center; /* Aligns the text to the center within the input field */
+}
