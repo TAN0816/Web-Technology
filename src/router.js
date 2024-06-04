@@ -1,8 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import AdminDashboard from './views/admin/AdminDashboard.vue'
-import MenuManageList from "./views/admin/menuManageList.vue"
-import OrderManageList from "./views/admin/orderManageList.vue"
-import OrderDetails from "./views/admin/orderDetails.vue"
+import MenuManageList from "./views/admin/MenuManageList.vue"
+import OrderManageList from "./views/admin/OrderManageList.vue"
+import OrderDetails from "./views/admin/OrderDetails.vue"
 import HomeWrapper from "./views/HomeWrapper.vue"
 
 const routes = [
