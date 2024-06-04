@@ -1,7 +1,7 @@
 <template>
-  <home-wrapper></home-wrapper>
-  <navigation-bar></navigation-bar>
-  
+  <!-- <home-wrapper></home-wrapper>
+  <navigation-bar></navigation-bar> -->
+  <RouterView />
 </template>
 
 <script>

@@ -47,7 +47,7 @@
 </template>
 
 <script>
-import MyNavBar from './NavBar.vue'
+import MyNavBar from '../components/NavBar.vue'
 
 export default {
   name: 'HomeWrapper',
