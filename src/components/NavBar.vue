@@ -42,10 +42,6 @@
     box-sizing: border-box;
   }
   
-  body {
-    background: whitesmoke;
-  }
-  
   .navigation-bar {
     position: fixed;
     top: 0;

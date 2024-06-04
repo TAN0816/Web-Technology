@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import AdminDashboard from './views/admin/AdminDashboard.vue'
 import MenuManageList from "./views/admin/MenuManageList.vue"
 import OrderManageList from "./views/admin/OrderManageList.vue"
+import UserManageList from "./views/admin/UserManageList.vue"
 import OrderDetails from "./views/admin/OrderDetails.vue"
 import HomeWrapper from "./views/HomeWrapper.vue"
 
@@ -13,12 +14,17 @@ const routes = [
     component: AdminDashboard
   },
   {
-    path: '/admin/menu',
+    path: '/admin/menuManage',
     name: 'AdminMenuManage',
     component: MenuManageList
   },
   {
-    path: '/admin/order',
+    path: '/admin/userManage',
+    name: 'UserManage',
+    component: UserManageList
+  },
+  {
+    path: '/admin/orderManage',
     name: 'AdminOrderManage',
     component: OrderManageList
   },

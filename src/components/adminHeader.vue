@@ -8,14 +8,14 @@
             <p>Food<span>.io</span></p>
         </div>
         <ul class="nav-content">
-            <li><a href="dashboard.php">Dashboard</a></li>
-            <li><a href="menuManageList.php">Menu Management</a></li>
-            <li><a href="OrderManageList.php">Order Management</a></li>
-            <li><a href="userManageList.php">User Management</a></li>
+            <li><router-link to="/admin/dashboard">Admin Dashboard</router-link></li>
+            <li><router-link to="/admin/menuManage">Menu Management</router-link></li>
+            <li><router-link to="/admin/orderManage">Order Management</router-link></li>
+            <li><router-link to="/admin/userManage">User Management</router-link></li>
         </ul>
         <div class="account">
             <div class="dropdown">
-                <img src="" alt="login-pic" />
+                <img src="../assets/image/login.png" alt="login-pic" />
                 <p>Admin</p>
 
                 <div class="dropdown-item">
@@ -37,6 +37,8 @@
     display: flex;
     width: 100%;
     height: 50px;
+    align-items: center;
+    margin: 20px 0 0 0;
 }
 
 .logo-container {
@@ -53,6 +55,7 @@
     color: rgb(255, 164, 170);
     font-size: 25px;
     font-weight: 600;
+    margin: 0;
 }
 
 .logo-container span {
@@ -90,6 +93,7 @@
     width: 35px;
     display: inline;
     cursor: pointer;
+    margin: 0;
 }
 
 .dropdown {
@@ -98,6 +102,7 @@
     background-color: white;
     height: 50px;
     width: 100px;
+    position: relative;
 }
 
 .account {
@@ -108,6 +113,7 @@
 .dropdown-item {
     position: absolute;
     top: 50px;
+    right: 0;
     height: 0;
     width: 100px;
     z-index: 999;
