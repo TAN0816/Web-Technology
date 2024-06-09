@@ -1,22 +1,21 @@
-<script setup>
-import AdminHeaderVue from "@/components/adminHeader.vue";
-</script>
 <template>
-    <AdminHeaderVue />
+    <AdminHeader />
     <div class="orderDetailsContainer">
         <div class="orderDetailsTitle">
-            <router-link to="/admin/orderManage"><i class="bi bi-arrow-left"></i></router-link>
+            <router-link to="/admin/orderManage"><i class="bi bi-chevron-left"></i></router-link>
             <h1>Order Details</h1>
         </div>
         <div class="updateOption">
-            <a class='btn btn-outline-success' href="OrderDetails.php?oid=$oid&edit=\">Edit Order</a>
+            <a class='btn btn-outline-success' :href="`/admin/orderDetail?orderId=${orderId}&edit=true`"
+                v-if="!editMode">Edit Order</a>
         </div>
 
         <div class="orderContent">
-            <form action="" method="post" class="updateForm text-start">
+            <form @submit.prevent="updateOrder" class="updateForm text-start">
                 <div class="mb-3">
                     <label for="orderStatus" class="form-label">Order Status:</label>
-                    <select id="orderStatus" name="orderStatus" class="form-select">
+                    <select id="orderStatus" name="orderStatus" class="form-select" v-model="orderInfo.order_status"
+                        :disabled="!editMode">
                         <option value="Pending Prepared">Pending Prepared</option>
                         <option value="Order in Progress">Order in Progress</option>
                         <option value="Ready To Pickup">Ready To Pickup</option>
@@ -27,19 +26,22 @@ import AdminHeaderVue from "@/components/adminHeader.vue";
                 </div>
                 <div class="mb-3">
                     <label for="cusName" class="form-label">Name:</label>
-                    <input type="text" name="cusName" id="cusName" class="form-control" value="">
+                    <input type="text" name="cusName" id="cusName" class="form-control"
+                        v-model="orderInfo.customer_name" :disabled="!editMode" />
                 </div>
                 <div class="mb-3">
                     <label for="contactNum" class="form-label">Contact Number:</label>
-                    <input type="text" name="contactNum" id="contactNum" class="form-control" value="">
+                    <input type="text" name="contactNum" id="contactNum" class="form-control"
+                        v-model="orderInfo.phone_num" :disabled="!editMode" />
                 </div>
                 <div class="mb-3">
                     <label for="address" class="form-label">Address:</label>
-                    <input type="text" name="address" id="address" class="form-control" value="">
+                    <input type="text" name="address" id="address" class="form-control" v-model="orderInfo.address"
+                        :disabled="!editMode" />
                 </div>
-                <button class="btn btn-primary mt-4" type="submit" name="update">Submit</button>
+                <button class="btn btn-primary mt-4" type="submit" name="update" v-if="editMode">Submit</button>
             </form>
-            
+
 
             <div class="orderDetails">
                 <table class="table table-hover">
@@ -53,19 +55,19 @@ import AdminHeaderVue from "@/components/adminHeader.vue";
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>%d</td>
-                            <td>%s</td>
-                            <td>%d</td>
-                            <td>%.2f</td>
-                            <td>%.2f</td>
+                        <tr v-for="(item, index) in orderItems" :key="index">
+                            <td>{{ index + 1 }}</td>
+                            <td>{{ item.FoodName }}</td>
+                            <td>{{ item.quantity }}</td>
+                            <td>{{ item.FoodPrice }}</td>
+                            <td>{{ item.price }}</td>
                         </tr>
                     </tbody>
                 </table>
                 <hr>
                 <div class="osummary">
-                    <span>Order Time: </span>
-                    <span><b>Total Price: </b></span>
+                    <span>Order Time: {{ orderInfo.cdate }}</span>
+                    <span><b>Total Price: {{ calculateTotalPrice() }} </b></span>
                 </div>
             </div>
         </div>
@@ -74,8 +76,72 @@ import AdminHeaderVue from "@/components/adminHeader.vue";
 
 </template>
 
+<script>
+export default ({
+    data() {
+        return {
+            orderId: '',
+            order: [],
+            orderInfo: '',
+            orderItems: [],
+            editMode: false,
+        }
+    },
+    methods: {
+        async getOrder() {
+            try {
+                const response = await fetch(`http://localhost:8080/getOrderById/${this.orderId}`);
+                this.order = await response.json();
+                this.orderInfo = this.order.orderInfo[0];
+                this.orderItems = this.order.orderItems;
+            } catch (error) {
+                console.error('Error fetching users:', error);
+            }
+        },
+        calculateTotalPrice() {
+            let totalPrice = 0;
+            for (const item of this.orderItems) {
+                totalPrice += parseFloat(item.price);
+            }
+            return totalPrice.toFixed(2); // Format to two decimal places
+        },
+        async updateOrder() {
+            try {
+                const response = await fetch(`http://localhost:8080/updateOrder/${this.orderId}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        order_status: this.orderInfo.order_status,
+                        customer_name: this.orderInfo.customer_name,
+                        phone_num: this.orderInfo.phone_num,
+                        address: this.orderInfo.address,
+                    })
+                });
+                const data = await response.json();
+                if (data.status === 'success') {
+                    alert('Order Updated Successfully');
+                    window.location.href = `/admin/orderDetail?orderId=${this.orderId}`;
+                } else {
+                    alert('Failed to Update Order');
+                    window.location.href = `/admin/orderDetail?orderId=${this.orderId}`;
+                }
+            } catch (error) {
+                console.error('Error updating order:', error);
+            }
+        }
+    },
+    mounted() {
+        this.orderId = this.$route.query.orderId;
+        this.editMode = this.$route.query.edit ? this.$route.query.edit : false;
+        this.getOrder();
+    },
+})
+</script>
+
 <style scoped>
-.orderDetailsContainer{
+.orderDetailsContainer {
     margin: 50px;
 }
 
@@ -84,23 +150,27 @@ import AdminHeaderVue from "@/components/adminHeader.vue";
     justify-content: start;
     align-items: center;
 }
-.orderDetailsTitle h1{
+
+.orderDetailsTitle h1 {
     font-size: 30px;
     margin: 0;
 }
-.orderDetailsTitle a{
+
+.orderDetailsTitle a {
     color: black;
     margin-right: 20px;
 }
 
-.updateOption{
+.updateOption {
     text-align: right;
     margin: 10px 0 20px 0;
 }
-.orderContent{
+
+.orderContent {
     display: flex;
 }
-.updateForm{
+
+.updateForm {
     display: flex;
     flex-direction: column;
     width: 300px;
@@ -108,72 +178,79 @@ import AdminHeaderVue from "@/components/adminHeader.vue";
     border-right: black 1px solid;
     height: 80vh;
 }
-.updateForm label:not(:first-child){
+
+.updateForm label:not(:first-child) {
     margin-top: 20px;
 }
 
-.orderDetails{
+.orderDetails {
     width: 75%;
     margin: 0 0 0 30px;
 }
+
 .orderDetailsTable,
 .orderDetailsTable th,
-.orderDetailsTable td{
+.orderDetailsTable td {
     border: rgb(165, 174, 255) 1px solid;
     border-spacing: 0;
     text-align: center;
 }
-.orderDetailsTable th{
+
+.orderDetailsTable th {
     padding: 10px;
     background-color: rgb(222, 222, 254);
 }
 
-.orderDetailsTable td{
+.orderDetailsTable td {
     padding: 10px;
     background-color: rgb(255, 255, 255);
 }
 
-.orderDetailsTable{
+.orderDetailsTable {
     width: 100%;
 }
 
-.osummary{
+.osummary {
     text-align: right;
     display: flex;
     justify-content: space-between;
 }
 
-.error{
+.error {
     border: rgb(250, 145, 145) solid 2px;
     background-color: rgb(251, 161, 161);
 }
 
-.success{
+.success {
     border: rgb(171, 255, 171) solid 2px;
     background-color: rgb(195, 255, 202);
 }
 
-.success, .error{
+.success,
+.error {
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     padding: 10px;
     width: fit-content;
     margin-left: 50px;
     position: fixed;
-    animation: deleteAnimation 3s linear forwards;;
+    animation: deleteAnimation 3s linear forwards;
+    ;
     animation-fill-mode: forwards;
 }
+
 @keyframes deleteAnimation {
     0% {
         opacity: 1;
     }
+
     100% {
         opacity: 0;
         display: none;
     }
-  }
-
-.success img, .error img{
-    margin-right: 10px;
 }
 
+.success img,
+.error img {
+    margin-right: 10px;
+}
 </style>

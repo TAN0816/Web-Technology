@@ -1,24 +1,20 @@
-<script setup>
-import AdminHeaderVue from "@/components/adminHeader.vue";
-</script>
-
 <template>
-    <AdminHeaderVue />
-    <div class="userMContainer container">
+    <AdminHeader />
+    <div class="userMContainer">
         <h1 class="title text-center">User List</h1>
         <div class="tool d-flex justify-content-between align-items-center mb-3">
-            <div class="filter d-flex align-items-center">
+            <div class="sort d-flex align-items-center">
                 <i class="bi bi-filter me-2"></i>
-                <select class="form-select me-2" name="filter">
+                <select class="form-select me-2" name="sort" v-model="sort">
                     <option value="">None</option>
                     <option value="sortname">Sort by name</option>
                     <option value="sortrole">Sort by role</option>
                 </select>
-                <button class="btn btn-primary">Apply</button>
+                <button class="btn btn-primary" v-on:click="fetchUsers()">Apply</button>
             </div>
             <div class="search d-flex">
-                <input type="text" name="search_val" value="" class="form-control me-2" placeholder="User Name" />
-                <button class="btn btn-primary"><i class="bi bi-search"></i></button>
+                <input type="text" name="search_val" value="" class="form-control me-2" placeholder="User Name" v-model="searchVal"/>
+                <button class="btn btn-primary" v-on:click="fetchUsers()"><i class="bi bi-search"></i></button>
             </div>
         </div>
         <div class="list-container">
@@ -32,33 +28,65 @@ import AdminHeaderVue from "@/components/adminHeader.vue";
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>%d</td>
-                        <td>%s</td>
-                        <td>%s</td>
-                        <td>%s</td>
+                    <tr v-if="users.length === 0">
+                        <td colspan="4" class="text-center">No user found.</td>
                     </tr>
-                    <!-- <tr>
-            <td colspan="4" class="text-center">No user found.</td>
-          </tr> -->
+                    <tr v-else v-for="user in users" :key="user.user_ID">
+                        <td>{{ user.user_ID }}</td>
+                        <td>{{ user.Username }}</td>
+                        <td>{{ user.Email }}</td>
+                        <td>{{ user.cRole }}</td>
+                    </tr>
                 </tbody>
             </table>
         </div>
     </div>
 </template>
+<script>
+export default ({
+    data(){
+        return {
+            sort: '',
+            searchVal: '',
+            users: [],
+        }
+    },
+    methods: {
+        async fetchUsers() {
+            try {
+                const response = await fetch(`http://localhost:8080/userManageList?search_val=${this.searchVal}&sort=${this.sort}`);
+                this.users = await response.json();
+            } catch (error) {
+                console.error('Error fetching users:', error);
+            }
+        }
+    },
+    mounted() {
+        this.fetchUsers();
+    },
+})
+</script>
+
 
 <style scoped>
+.menuMContainer,
+.orderMContainer,
 .userMContainer {
-    margin: 50px auto;
+    margin: 50px;
+}
+
+.addmenu {
+    text-align: end;
+    margin-bottom: 10px;
+}
+
+.addmenu .add img {
+    width: 25px;
 }
 
 .title {
     font-size: 35px;
-}
-
-.table {
-    width: 100%;
-    border-radius: 10px;
+    text-align: center;
 }
 
 th:first-child {
@@ -75,10 +103,6 @@ th:last-child {
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
-
-.table-hover tbody tr:hover {
-    background-color: #f5f5f5;
 }
 
 .error {
@@ -99,6 +123,7 @@ th:last-child {
     margin-left: 50px;
     position: fixed;
     animation: deleteAnimation 3s linear forwards;
+    ;
     animation-fill-mode: forwards;
 }
 

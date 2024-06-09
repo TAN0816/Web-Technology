@@ -1,10 +1,8 @@
 <script setup>
-import AdminHeaderVue from "@/components/adminHeader.vue";
-
 </script>
 
 <template>
-    <AdminHeaderVue />
+    <AdminHeader />
     <div class="wrapper">
         <div class="date">Date: 5/6/2024</div>
         <div class="dashboard_container">

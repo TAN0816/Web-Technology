@@ -1,23 +1,20 @@
-<script setup>
-import AdminHeaderVue from "@/components/adminHeader.vue";
-</script>
 <template>
-    <AdminHeaderVue />
+    <AdminHeader />
     <div class="orderMContainer">
         <h1 class="title text-center">Order List</h1>
         <div class="tool d-flex justify-content-between align-items-center mb-3">
             <div class="filter d-flex align-items-center">
                 <i class="bi bi-filter me-2"></i>
-                <select class="form-select me-2" name="filter">
+                <select class="form-select me-2" name="filter" v-model="sort">
                     <option value="">None</option>
                     <option value="sortname">Sort by name</option>
                     <option value="sortrole">Sort by role</option>
                 </select>
-                <button class="btn btn-primary">Apply</button>
+                <button class="btn btn-primary" v-on:click="fetchOrders()">Apply</button>
             </div>
             <div class="search d-flex">
-                <input type="text" name="search_val" value="" class="form-control me-2" placeholder="User Name" />
-                <button class="btn btn-primary"><i class="bi bi-search"></i></button>
+                <input type="text" name="search_val" value="" class="form-control me-2" placeholder="User Name"  v-model="searchVal" />
+                <button class="btn btn-primary" v-on:click="fetchOrders()"><i class="bi bi-search"></i></button>
             </div>
         </div>
         <div class="list-container">
@@ -32,26 +29,52 @@ import AdminHeaderVue from "@/components/adminHeader.vue";
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Mr Tan</td>
-                        <td>12/2/2024</td>
-                        <td>Pending</td>
+                    <tr v-if="orders.length === 0">
+                        <td colspan="6" class="text-center">No order found.</td>
+                    </tr>
+                    <tr v-else v-for="order in orders" :key="order.order_ID">
+                        <td>{{ order.order_ID }}</td>
+                        <td>{{ order.customer_name }}</td>
+                        <td>{{ order.cdate }}</td>
+                        <td>{{ order.order_status }}</td>
                         <td class="view">
-                            <a class="btn btn-outline-primary" href="/admin/orderDetail">View</a>
+                            <a class="btn btn-outline-primary" :href="`/admin/orderDetail?orderId=${order.order_ID}`">View</a>
                         </td>
                         <td class="edit">
-                            <a class="btn btn-outline-success" href="OrderDetails.php?oid=$oid&edit=">Edit</a>
+                            <a class="btn btn-outline-success" :href="`/admin/orderDetail?orderId=${order.order_ID}&edit=true`">Edit</a>
                         </td>
                     </tr>
-                    <!-- <tr>
-                        <td colspan="6" class="text-center">No order found.</td>
-                    </tr> -->
                 </tbody>
             </table>
         </div>
     </div>
 </template>
+
+<script>
+export default ({
+    data(){
+        return {
+            sort: '',
+            searchVal: '',
+            orders: [],
+        }
+    },
+    methods: {
+        async fetchOrders() {
+            try {
+                const response = await fetch(`http://localhost:8080/orderManageList?search_val=${this.searchVal}&sort=${this.sort}`);
+                this.orders = await response.json();
+            } catch (error) {
+                console.error('Error fetching orders:', error);
+            }
+        }
+    },
+    mounted() {
+        this.fetchOrders();
+    },
+})
+</script>
+
 <style scoped>
 .menuMContainer,
 .orderMContainer,
