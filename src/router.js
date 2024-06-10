@@ -5,6 +5,7 @@ import OrderManageList from "./views/admin/OrderManageList.vue"
 import UserManageList from "./views/admin/UserManageList.vue"
 import OrderDetails from "./views/admin/OrderDetails.vue"
 import HomeWrapper from "./views/HomeWrapper.vue"
+import UserOrder from "./views/user/UserOrder.vue"
 
 const routes = [
   { path: '/', component: HomeWrapper },
@@ -32,6 +33,11 @@ const routes = [
     path: '/admin/orderDetail',
     name: 'AdminOrderDetail',
     component: OrderDetails
+  },
+  {
+    path: '/user/order',
+    name: 'UserOrder',
+    component: UserOrder
   }
 ]
 const router = createRouter({
