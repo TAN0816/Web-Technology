@@ -16,7 +16,7 @@
   
       <div class="account">
         <div class="dropdown">
-          <img src="../image/login.png" alt="login-pic"/>
+          <img src="../assets/image/login.png" alt="login-pic"/>
           <p><a href="./profiledisplay.php" style="text-decoration: none; color:black;" >Customer</a></p>
 
         <div class="dropdown-item">
@@ -24,6 +24,7 @@
       </div>
     </div>
     </div>
+  </nav>
 </template>
 
 <style scoped>
