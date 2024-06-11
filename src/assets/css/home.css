@@ -81,9 +81,17 @@ body{
   border-radius:30px;
   cursor:pointer;
   transition: .3s ease;
+   cursor: pointer;
+  transition: .3s ease;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center; 
   
 }
 
+.loginBtn {
+  margin-right: 10px;
+}
 .loginBtn:hover, .registerBtn:hover{
   background-color: #ff9a75;
 }
