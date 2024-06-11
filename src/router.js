@@ -5,10 +5,13 @@ import MenuManageList from "./views/admin/MenuManageList.vue"
 import OrderManageList from "./views/admin/OrderManageList.vue"
 import UserManageList from "./views/admin/UserManageList.vue"
 import OrderDetails from "./views/admin/OrderDetails.vue"
+import MenuCart from "./views/user/MenuCart.vue"
+import PaymentPage from "./views/user/PaymentPage.vue"
 import HomeWrapper from "./views/HomeWrapper.vue"
 import Home from "./views/user/Home.vue"
 import LoginForm from './views/LoginForm.vue'
 
+import UserOrder from "./views/user/UserOrder.vue"
 
 const routes = [
   { path: '/', component: HomeWrapper },
@@ -51,7 +54,22 @@ const routes = [
     path: '/home',
     name: 'Home',
     component: Home
-    }
+    },
+  {
+    path: '/user/MenuCart',
+    name: 'UserMenuCart',
+    component: MenuCart,
+  },
+  {
+    path: '/user/PaymentPage',
+    name: 'PaymentPage',
+    component: PaymentPage,
+  },
+  {
+    path: '/user/order',
+    name: 'UserOrder',
+    component: UserOrder
+  }
 ]
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),

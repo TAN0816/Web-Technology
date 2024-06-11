@@ -1,115 +1,121 @@
-<!-- <template>
-  <nav class="navigation-bar">
-    <div class="nav-logo">
-      <p>Food.io</p>
-    </div>
-
-    <div class="nav-menu">
-      <ul>
-        <li><router-link to="/" class="link">Home</router-link></li>
-        <li>
-          <router-link to="/menu" class="link">
-            Menu & <i class="bx bx-cart"></i> Cart
-          </router-link>
-        </li>
-        <li><router-link to="/order" class="link">Order</router-link></li>
-      </ul>
-    </div>
-
-    <div class="account">
-      <div class="dropdown">
-        <img src="../assets/image/login.png" alt="login-pic" />
-        <p><router-link to="/profile" style="text-decoration: none; color: black;">Customer</router-link></p>
-        <div class="dropdown-item">
-          <router-link to="/register" class="customerlogout"><i class="bi bi-box-arrow-left"></i><span>Log Out</span></router-link>
-        </div>
+<template>
+    <nav class="navigation-bar">
+      <div class="nav-logo">
+        <p>Food.io</p>
       </div>
+  
+      <div class="nav-menu">
+        <ul>
+          <li><a href="./home.php" class="link">Home</a></li>
+          <li>
+            <router-link to="/user/MenuCart">Menu Cart</router-link>
+          </li>
+          <li><a href="./orderc.php" class="link">Order</a></li>
+        </ul>
+      </div>
+  
+      <div class="account">
+        <div class="dropdown">
+          <img src="../assets/image/login.png" alt="login-pic"/>
+          <p><a href="./profiledisplay.php" style="text-decoration: none; color:black;" >Customer</a></p>
+
+        <div class="dropdown-item">
+          <a href="../logout.php" class="customerlogout"><i class="bi bi-box-arrow-left"></i><span>Log Out</span></a>
+      </div>
+    </div>
     </div>
   </nav>
 </template>
 
-<script>
-export default {
-  name: "MyNavBar"
-};
-</script>
-
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;1,500&display=swap');
+ @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;1,500&display=swap');
 
-* {
+*{
   padding: 0;
   box-sizing: border-box;
 }
 
-.navigation-bar {
-  position: fixed;
-  top: 0;
-  display: flex;
-  justify-content: space-around;
-  width: 100%;
-  height: 100px;
-  line-height: 100px;
-  z-index: 100;
-  background: #ffffff;
-  margin: 0;
+body{
+  background: whitesmoke;
+  
 }
 
-.nav-logo p {
-  color: rgb(255, 164, 170);
+.wrapper{
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh;
+  margin:0;
+}
+
+.nav{
+  position:fixed;
+  top:0;
+  display:flex;
+  justify-content:space-around;
+  width:100%;
+  height:100px;
+  line-height:100px;
+  z-index:100;
+  background: #ffffff;
+  margin:0;
+
+}
+
+.nav-logo p{
+  color:rgb(255, 164, 170);
   font-size: 25px;
   font-weight: 600;
-  margin: 0;
+  margin:0;
 }
 
-.nav-menu ul {
-  display: flex;
-  margin: 0;
-  font-family: 'Poppins', sans-serif;
+.nav-menu ul{
+  display:flex;
+  margin:0;
+  font-family:'Poppins', sans-serif;
 }
 
-.nav-menu ul li {
+.nav-menu ul li{
   list-style-type: none;
-  margin: 0;
-  font-family: 'Poppins', sans-serif;
+  margin:0;
+  font-family:'Poppins', sans-serif;
 }
 
-.nav-menu ul li .link {
+.nav-menu ul li .link{
   text-decoration: none;
   font-weight: 500;
-  color: black;
+  color:black;
   padding-bottom: 15px;
-  margin: 0 25px;
+  margin:0 25px;
+  
+  
 }
 
-.link:hover,
-.active {
-  border-bottom: 2px solid #fc6027;
+.link:hover, .active{
+  border-bottom:2px solid#fc6027;
+  
 }
 
-.dropdown img,
-.dropdown p {
+.dropdown img, .dropdown p{
   width: 35px;
   display: inline;
   cursor: pointer;
 }
-
-.dropdown {
+.dropdown{
   display: flex;
   align-items: center;
   background-color: white;
   height: 100px;
   width: 100px;
   font-weight: 100;
-  font-family: 'Poppins', sans-serif;
+  font-family:'Poppins', sans-serif;
+
 }
 
-.account {
+.account{
   margin-right: 50px;
   position: relative;
 }
-
-.dropdown-item {
+.dropdown-item{
   position: absolute;
   top: 65px;
   height: 0;
@@ -125,8 +131,7 @@ export default {
   border-radius: 10px;
   right: -15px;
 }
-
-.dropdown:hover .dropdown-item {
+.dropdown:hover .dropdown-item{
   transition: height 0.3s linear;
   display: flex;
   align-items: center;
@@ -135,56 +140,9 @@ export default {
   background-color: rgb(255, 198, 164);
   border-radius: 10px;
 }
-
-.customerlogout {
+.customerlogout{
   text-decoration: none;
   color: black;
+  
 }
-</style> -->
-
-
-<template>
-  <nav class="nav">
-    <div class="nav-logo">
-      <p>Food.io</p>
-    </div>
-
-    <div class="nav-menu">
-      <ul>
-        <li><router-link to="/" class="link" :class="{ active: isActive('/') }">Home</router-link></li>
-        <li><router-link to="/menu" class="link" :class="{ active: isActive('/menu') }">Menu</router-link></li>
-        <li>
-          <div class="nav-menu-btn">
-            <router-link to="/cart" class="link">
-              <i class='bx bx-cart'></i>
-              Cart
-            </router-link>
-          </div>
-        </li>
-        <li><router-link to="/order" class="link" :class="{ active: isActive('/order') }">Order</router-link></li>
-      </ul>
-    </div>
-
-    <div class="nav-button">
-      <button class="loginBtn" @click="navigateTo('login')">Sign In</button>
-      <button class="registerBtn" @click="navigateTo('register')">Sign Up</button>
-    </div>
-  </nav>
-</template>
-
-<script>
-export default {
-  methods: {
-    navigateTo(route) {
-      this.$router.push(`/${route}`);
-    },
-    isActive(route) {
-      return this.$route.path === route;
-    }
-  }
-}
-</script>
-
-<style scoped>
-/* Add your styles here */
 </style>
