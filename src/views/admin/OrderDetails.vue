@@ -71,12 +71,13 @@
                 </div>
             </div>
         </div>
-
+        <div id="toastContainer" class="position-fixed bottom-0 end-0 p-3"></div>
     </div>
 
 </template>
 
 <script>
+import Swal from 'sweetalert2'
 export default ({
     data() {
         return {
@@ -121,11 +122,21 @@ export default ({
                 });
                 const data = await response.json();
                 if (data.status === 'success') {
-                    alert('Order Updated Successfully');
-                    window.location.href = `/admin/orderDetail?orderId=${this.orderId}`;
+                    this.editMode = false;
+                    // alert('Order Updated Successfully');
+                    Swal.fire({
+                        icon: "success",
+                        title: "Order Updated Successfully",
+                        showConfirmButton: true
+                    });
                 } else {
-                    alert('Failed to Update Order');
-                    window.location.href = `/admin/orderDetail?orderId=${this.orderId}`;
+                    this.editMode = false;
+                    // alert('Failed to Update Order');
+                    Swal.fire({
+                        icon: "error",
+                        title: "Failed to Update Order",
+                        showConfirmButton: true
+                    });
                 }
             } catch (error) {
                 console.error('Error updating order:', error);
@@ -214,43 +225,5 @@ export default ({
     text-align: right;
     display: flex;
     justify-content: space-between;
-}
-
-.error {
-    border: rgb(250, 145, 145) solid 2px;
-    background-color: rgb(251, 161, 161);
-}
-
-.success {
-    border: rgb(171, 255, 171) solid 2px;
-    background-color: rgb(195, 255, 202);
-}
-
-.success,
-.error {
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-    padding: 10px;
-    width: fit-content;
-    margin-left: 50px;
-    position: fixed;
-    animation: deleteAnimation 3s linear forwards;
-    ;
-    animation-fill-mode: forwards;
-}
-
-@keyframes deleteAnimation {
-    0% {
-        opacity: 1;
-    }
-
-    100% {
-        opacity: 0;
-        display: none;
-    }
-}
-
-.success img,
-.error img {
-    margin-right: 10px;
 }
 </style>

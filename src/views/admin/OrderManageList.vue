@@ -5,15 +5,19 @@
         <div class="tool d-flex justify-content-between align-items-center mb-3">
             <div class="filter d-flex align-items-center">
                 <i class="bi bi-filter me-2"></i>
-                <select class="form-select me-2" name="filter" v-model="sort">
+                <select class="form-select me-2" name="filter" v-model="filter">
                     <option value="">None</option>
-                    <option value="sortname">Sort by name</option>
-                    <option value="sortrole">Sort by role</option>
+                    <option value="Pending Prepared">Pending Prepared</option>
+                    <option value="Order in Progress">Order in Progress</option>
+                    <option value="Ready To Pickup">Ready To Pickup</option>
+                    <option value="Ready To Deliver">Ready To Deliver</option>
+                    <option value="Delivery In Progress">Delivery In Progress</option>
+                    <option value="Delivered">Delivered</option>
                 </select>
                 <button class="btn btn-primary" v-on:click="fetchOrders()">Apply</button>
             </div>
             <div class="search d-flex">
-                <input type="text" name="search_val" value="" class="form-control me-2" placeholder="User Name"  v-model="searchVal" />
+                <input type="text" name="search_val" value="" class="form-control me-2" placeholder="Customer Name"  v-model="searchVal" />
                 <button class="btn btn-primary" v-on:click="fetchOrders()"><i class="bi bi-search"></i></button>
             </div>
         </div>
@@ -54,7 +58,7 @@
 export default ({
     data(){
         return {
-            sort: '',
+            filter: '',
             searchVal: '',
             orders: [],
         }
@@ -62,7 +66,7 @@ export default ({
     methods: {
         async fetchOrders() {
             try {
-                const response = await fetch(`http://localhost:8080/orderManageList?search_val=${this.searchVal}&sort=${this.sort}`);
+                const response = await fetch(`http://localhost:8080/orderManageList?search_val=${this.searchVal}&filter=${this.filter}`);
                 this.orders = await response.json();
             } catch (error) {
                 console.error('Error fetching orders:', error);
