@@ -8,9 +8,7 @@
         <ul>
           <li><a href="./home.php" class="link">Home</a></li>
           <li>
-            <a href="./menucart.php" class="link">
-              Menu & <i class="bx bx-cart"></i> Cart
-            </a>
+            <router-link to="/user/MenuCart">Menu Cart</router-link>
           </li>
           <li><a href="./orderc.php" class="link">Order</a></li>
         </ul>
