@@ -92,6 +92,8 @@ export default {
   width: 35px;
   display: inline;
   cursor: pointer;
+  margin-bottom: 0%;
+
 }
 
 .dropdown {
