@@ -19,7 +19,7 @@
                 <p>Admin</p>
 
                 <div class="dropdown-item">
-                    <a href="../logout.php" class="adminlogout"><i class="bi bi-box-arrow-left"></i><span>Log
+                    <a href="../register" class="adminlogout"><i class="bi bi-box-arrow-left"></i><span>Log
                             Out</span></a>
                 </div>
             </div>

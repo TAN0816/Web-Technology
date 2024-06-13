@@ -61,6 +61,8 @@ export default{
         const result=await response.json();
         if(result.success){
           this.message=''; //Clear any previous error message
+          localStorage.setItem('role', result.role);
+          localStorage.setItem('userid', result.userId)
           if(result.role === 'admin'){
             this.$router.push('/admin/dashboard');
           }else{
