@@ -7,6 +7,11 @@
   font-family:'Poppins', sans-serif;*/
 }
 
+body{
+  background: whitesmoke;
+  
+}
+
 .wrapper{
   justify-content: center;
   align-items: center;
@@ -76,8 +81,17 @@
   border-radius:30px;
   cursor:pointer;
   transition: .3s ease;
+   cursor: pointer;
+  transition: .3s ease;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center; 
+  
 }
 
+.loginBtn {
+  margin-right: 10px;
+}
 .loginBtn:hover, .registerBtn:hover{
   background-color: #ff9a75;
 }
@@ -186,7 +200,7 @@
   font-size: 100;
   font-family: sans-serif;
   display:block;
-  margin:0px 100px;
+  margin:0px 250px;
 }
 
 .content button:hover{
@@ -226,7 +240,8 @@
   width:100%;
   display:flex;
   margin-bottom:50px;
-  margin-left:60px;
+  margin-left:40px;
+  margin-right:20px;
   justify-content:center;
 }
 
@@ -242,6 +257,8 @@
   font-weight:600;
   font-family: sans-serif;
   margin-bottom:90px;
+  padding-right:100px;
+  text-align:left;
 
 }
 

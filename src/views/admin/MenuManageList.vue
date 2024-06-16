@@ -53,7 +53,7 @@
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="editMenuModalLabel">Edit Menu</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        <button type="button" class="btn-close closeModal" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
@@ -119,7 +119,8 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="addMenuModalLabel">Add Menu</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close closeModal" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <!-- Your form content here -->
@@ -172,6 +173,7 @@
 </template>
 
 <script>
+import Swal from 'sweetalert2'
 export default {
     data() {
         return {
@@ -213,9 +215,13 @@ export default {
                 });
 
                 if (response.ok) {
-                    alert('Menu added successfully');
-                    // this.getAllMenuItems();
-                    window.location.href = "/admin/menuManage"
+                    Swal.fire({
+                        icon: "success",
+                        title: "Menu added successfully",
+                        showConfirmButton: true
+                    });
+                    this.getAllMenuItems();
+                    // window.location.href = "/admin/menuManage"
                     // Clear form fields
                     this.newFoodName = '';
                     this.newFoodDescription = '';
@@ -223,12 +229,21 @@ export default {
                     this.newFoodImg = null;
                     this.newFoodAvailability = 'Yes';
                 } else {
-                    const result = await response.json();
-                    alert('Failed to add menu: ' + result.message);
+                    Swal.fire({
+                        icon: "error",
+                        title: 'Failed to add menu',
+                        showConfirmButton: true
+                    });
                 }
+                this.closeModal();
             } catch (error) {
                 console.error('Error:', error);
-                alert('Failed to add menu');
+                Swal.fire({
+                    icon: "error",
+                    title: 'Failed to add menu',
+                    showConfirmButton: true
+                });
+                this.closeModal();
             }
         },
         async handleFormSubmit(itemId) {
@@ -238,26 +253,50 @@ export default {
                     method: 'POST',
                     body: formData
                 });
-
+                const result = await response.json();
                 if (response.ok) {
-                    const result = await response.json();
-                    alert(result.message);
-                    window.location.href = '/admin/menuManage';
+
+                    Swal.fire({
+                        icon: "success",
+                        title: result.message,
+                        showConfirmButton: true
+                    });
+                    this.getAllMenuItems();
+                    // window.location.href = '/admin/menuManage';
                 } else {
-                    alert('Failed to update menu');
+                    Swal.fire({
+                        icon: "error",
+                        title: result.message,
+                        showConfirmButton: true
+                    });
                 }
+                this.closeModal();
             } catch (error) {
                 console.error('Error:', error);
-                alert('Failed to update menu');
+                Swal.fire({
+                    icon: "error",
+                    title: 'Failed to update menu',
+                    showConfirmButton: true
+                });
+                this.closeModal();
             }
         },
         async deleteMenu(foodId) {
-            const confirmDelete = confirm("Are you sure you want to delete this menu item?");
-            if (!confirmDelete) {
-                return; // Do nothing if user cancels
-            }
-
             try {
+                const result = await Swal.fire({
+                    title: 'Are you sure?',
+                    text: 'You won\'t be able to revert this!',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                });
+
+                if (!result.isConfirmed) {
+                    return; // Do nothing if user cancels
+                }
+
                 const response = await fetch(`http://localhost:8080/deleteMenu/${foodId}`, {
                     method: 'DELETE'
                 });
@@ -266,16 +305,38 @@ export default {
                     const result = await response.json();
                     if (result.status === 'success') {
                         this.getAllMenuItems();
-                        alert(result.message);
+                        Swal.fire({
+                            icon: "success",
+                            title: result.message,
+                            showConfirmButton: true
+                        });
                     } else {
-                        alert(result.message);
+                        Swal.fire({
+                            icon: "error",
+                            title: result.message,
+                            showConfirmButton: true
+                        });
                     }
                 } else {
-                    alert('Failed to delete menu');
+                    Swal.fire({
+                        icon: "error",
+                        title: 'Failed to delete menu',
+                        showConfirmButton: true
+                    });
                 }
             } catch (error) {
                 console.error('Error deleting menu:', error);
-                alert('Failed to delete menu');
+                Swal.fire({
+                    icon: "error",
+                    title: 'Failed to delete menu',
+                    showConfirmButton: true
+                });
+            }
+        },
+        closeModal() {
+            const closeButtons = document.getElementsByClassName('closeModal');
+            for (const closeButton of closeButtons) {
+                closeButton.click();
             }
         }
 

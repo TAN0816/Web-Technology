@@ -8,6 +8,10 @@ import MenuCart from "./views/user/MenuCart.vue"
 import PaymentPage from "./views/user/PaymentPage.vue"
 import HomeWrapper from "./views/HomeWrapper.vue"
 import UserOrder from "./views/user/UserOrder.vue"
+import Home from "./views/user/Home.vue" // <-- Added import statement
+import LoginForm from './views/LoginForm.vue'
+import RegisterForm from './views/RegisterForm.vue'
+
 
 const routes = [
   { path: '/', component: HomeWrapper },
@@ -50,7 +54,22 @@ const routes = [
     path: '/user/order',
     name: 'UserOrder',
     component: UserOrder
-  }
+  },
+    {
+    path: '/register',
+    name: 'RegisterForm',
+    component: RegisterForm
+  },
+  {
+  path: '/login',
+  name: 'LoginForm',
+  component: LoginForm
+  },
+  {
+    path: '/home',
+    name: 'Home',
+    component: Home
+    },
 ]
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),

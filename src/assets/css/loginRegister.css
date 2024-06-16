@@ -114,10 +114,10 @@ body{
 
 
 
-
 .right {
   flex: 1;
   padding: 0 20px;
+  
 }
 
 .form-box{
@@ -132,6 +132,8 @@ body{
   padding-bottom:10px;
   border-bottom:1px solid #83756a;
   margin-bottom:10px;
+  text-align: left;
+
 }
 
 .form-box form .field{
@@ -174,6 +176,7 @@ body{
 
 .link{
   margin-bottom:15px;
+  
 }
 
 .message{
@@ -191,4 +194,40 @@ body{
   margin-top: 5px;
   margin-left: 20px;
   color:rgb(20, 1, 1);
+}
+
+.popup {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px 20px;
+  background-color: red;
+  color: white;
+  border-radius: 5px;
+  z-index: 1000;
+  display: none;
+}
+
+.popup.show {
+  display: block;
+}
+
+
+
+/* Align form content to the left */
+.right {
+  flex: 1;
+  padding: 0 20px;
+}
+
+/* Add this style to align the label to the left */
+.form-box form .field.label-left label {
+  text-align: left;
+}
+
+.form-box form .links{
+  text-align: left;
+  font-size: 15px;
+
 }

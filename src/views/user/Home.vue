@@ -1,6 +1,6 @@
 <template>
   <div class="home-wrapper">
-    <MyNavBar />
+    <HomeHeader />
 
     <section>
       <div class="grid">
@@ -47,14 +47,12 @@
 </template>
 
 <script>
-import MyNavBar from '../components/NavBar.vue'
-
-
+import HomeHeader from '../../components/HomeHeader.vue'
 
 export default {
   name: 'HomeWrapper',
   components: {
-    MyNavBar
+    HomeHeader
   },
   data() {
     return {
@@ -95,7 +93,7 @@ export default {
 </script>
 
 <style scoped>
-@import '../assets/css/home.css';
-
+/* @import '../assets/css/home.css'; */
+@import "@/assets/css/home.css";
 /* Add additional styles here if needed */
 </style>
