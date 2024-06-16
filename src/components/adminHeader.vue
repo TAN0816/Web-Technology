@@ -1,17 +1,13 @@
-<script>
-
-</script>
-
 <template>
     <div class="aHeader-container">
         <div class="logo-container">
             <p>Food<span>.io</span></p>
         </div>
         <ul class="nav-content">
-            <li><router-link to="/admin/dashboard">Admin Dashboard</router-link></li>
-            <li><router-link to="/admin/menuManage">Menu Management</router-link></li>
-            <li><router-link to="/admin/orderManage">Order Management</router-link></li>
-            <li><router-link to="/admin/userManage">User Management</router-link></li>
+            <li><router-link to="/admin/dashboard" :class="{ active: isActive('/admin/dashboard')}" >Admin Dashboard</router-link></li>
+            <li><router-link to="/admin/menuManage" :class="{ active: isActive('/admin/menuManage')}" >Menu Management</router-link></li>
+            <li><router-link to="/admin/orderManage" :class="{ active: isActive('/admin/orderManage')}" >Order Management</router-link></li>
+            <li><router-link to="/admin/userManage" :class="{ active: isActive('/admin/userManage')}" >User Management</router-link></li>
         </ul>
         <div class="account">
             <div class="dropdown">
@@ -19,13 +15,28 @@
                 <p>Admin</p>
 
                 <div class="dropdown-item">
-                    <a href="../register" class="adminlogout"><i class="bi bi-box-arrow-left"></i><span>Log
-                            Out</span></a>
+                    <button class="adminlogout" @click="logout"><i class="bi bi-box-arrow-left"></i><span>Log
+                            Out</span></button>
                 </div>
             </div>
         </div>
     </div>
 </template>
+
+<script>
+export default {
+  methods: {
+    logout() {
+      localStorage.removeItem('role');
+      localStorage.removeItem('userid');
+      window.location.href = '/login';
+    },
+    isActive(route) {
+      return this.$route.path === route;
+    }
+  },
+};
+</script>
 
 <style scoped>
 * {
@@ -81,11 +92,13 @@
     position: relative;
     text-decoration: none;
     color: black;
+    padding-bottom: 15px;
 }
 
-.nav-content li a:hover {
-    text-decoration: none;
-    color: rgb(247, 147, 152);
+.nav-content li a:hover, .active {
+    /*text-decoration: none;
+    color: rgb(247, 147, 152);*/
+    border-bottom: 2px solid #FF6384;
 }
 
 .dropdown img,
@@ -99,7 +112,7 @@
 .dropdown {
     display: flex;
     align-items: center;
-    background-color: white;
+    background-color: transparent;
     height: 50px;
     width: 100px;
     position: relative;
@@ -123,7 +136,7 @@
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    background-color: rgb(162, 205, 255);
+    background-color: rgb(255, 198, 164);
     border-radius: 10px;
 }
 
@@ -133,12 +146,12 @@
     align-items: center;
     justify-content: center;
     height: 50px;
-    background-color: rgb(162, 205, 255);
-    border-radius: 10px;
 }
 
 .adminlogout {
     text-decoration: none;
     color: black;
+    border: none;
+    background: transparent;
 }
 </style>

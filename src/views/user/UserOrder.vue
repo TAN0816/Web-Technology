@@ -1,5 +1,4 @@
 <template>
-  <UserHeader />
   <div class="order-details-container">
     <div class="order-details">
       <h1 class="title">Your Order Details</h1>

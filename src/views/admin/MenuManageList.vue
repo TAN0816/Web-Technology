@@ -1,5 +1,4 @@
 <template>
-    <AdminHeader />
     <div class=menuMContainer>
         <h1 class=title>Menu List</h1>
         <div class=addmenu>

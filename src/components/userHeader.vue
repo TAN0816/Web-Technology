@@ -7,13 +7,13 @@
     <div class="nav-menu">
       <ul>
         <!-- Replace anchor tags with router-link -->
-        <li><router-link to="/" class="link">Home</router-link></li>
+        <li><router-link to="/home" class="link" :class="{ active: isActive('/home')}" >Home</router-link></li>
         <li>
-          <router-link to="/menucart" class="link">
+          <router-link to="/user/MenuCart" class="link" :class="{ active: isActive('/user/MenuCart')}">
             Menu & <i class="bx bx-cart"></i> Cart
           </router-link>
         </li>
-        <li><router-link to="/user/order" class="link">Order</router-link></li>
+        <li><router-link to="/user/order" class="link" :class="{ active: isActive('/user/order')}">Order</router-link></li>
       </ul>
     </div>
 
@@ -22,7 +22,7 @@
         <img src="../assets/image/login.png" alt="login-pic" />
         <p><router-link to="/profiledisplay" style="text-decoration: none; color: black;">Customer</router-link></p>
         <div class="dropdown-item">
-          <router-link to="/logout" class="customerlogout"><i class="bi bi-box-arrow-left"></i><span>Log Out</span></router-link>
+          <button class="customerlogout" @click="logout"><i class="bi bi-box-arrow-left"></i><span>Log Out</span></button>
         </div>
       </div>
     </div>
@@ -30,11 +30,20 @@
 </template>
 
   
-  <script>
-  export default {
-    name: "MyNavBar"
-  };
-  </script>
+<script>
+export default {
+  methods: {
+    logout() {
+      localStorage.removeItem('role');
+      localStorage.removeItem('userid');
+      window.location.href = '/login';
+    },
+    isActive(route) {
+      return this.$route.path === route;
+    }
+  },
+};
+</script>
   
   <style scoped>
   @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;1,500&display=swap');
@@ -142,6 +151,8 @@
   .customerlogout {
     text-decoration: none;
     color: black;
+    border: none;
+    background: transparent;
   }
   </style>
   

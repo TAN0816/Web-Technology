@@ -1,8 +1,6 @@
 <script setup>
-import userHeaderVue from "@/components/NavBar.vue";
 </script>
 <template>
-   <userHeaderVue></userHeaderVue>
 <body>
    <div>
       <div class="background">

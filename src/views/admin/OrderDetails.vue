@@ -1,5 +1,4 @@
 <template>
-    <AdminHeader />
     <div class="orderDetailsContainer">
         <div class="orderDetailsTitle">
             <router-link to="/admin/orderManage"><i class="bi bi-chevron-left"></i></router-link>

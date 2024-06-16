@@ -1,5 +1,4 @@
 <template>
-    <AdminHeader />
     <div class="userMContainer">
         <h1 class="title text-center">User List</h1>
         <div class="tool d-flex justify-content-between align-items-center mb-3">
