@@ -9,7 +9,7 @@
     <div class="nav-menu">
       <ul>
         <li><router-link to="/" class="link" :class="{ active: isActive('/') }">Home</router-link></li>
-        <li><router-link to="/menu" class="link" :class="{ active: isActive('/menu') }">Menu</router-link></li>
+        <li><router-link to="/user/MenuCart" class="link" :class="{ active: isActive('/user/MenuCart') }">Menu</router-link></li>
         <li>
           <div class="nav-menu-btn">
             <router-link to="/cart" class="link">

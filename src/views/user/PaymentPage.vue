@@ -118,6 +118,7 @@ export default {
          formData.append('address', this.caddress);
          formData.append('phone_num', this.cpnumber);
          formData.append('order', JSON.stringify(this.orders));
+         formData.append('userid', localStorage.getItem('userid'));
 
          // Log form data values
          for (let [key, value] of formData.entries()) {

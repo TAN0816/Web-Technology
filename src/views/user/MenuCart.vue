@@ -328,6 +328,8 @@ body {
 }
 
 .container {
+  display:flex;
+  flex-direction: column;
   width: 66vw;
   margin: 10px 25px 25px 45px;
   background-color: white;
