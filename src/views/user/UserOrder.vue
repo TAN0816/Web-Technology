@@ -213,7 +213,8 @@ export default {
       order.showDropdown = !order.showDropdown;
     },
     fetchOrders() {
-      fetch("http://localhost:8080/orders/${userId}")
+      const userId = localStorage.getItem('userid');
+      fetch(`http://localhost:8080/orders/${userId}`)
         .then((response) => response.json())
         .then((data) => {
           this.orders = data.map((order) => ({
