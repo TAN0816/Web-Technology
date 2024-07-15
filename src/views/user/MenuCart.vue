@@ -9,7 +9,7 @@
         <h2 class="menu-title">Our Menu</h2>
         <div class="menulist" v-if="products.length != 0">
           <div v-for="product in products" :key="product.id">
-            <div class="menu">
+            <div class="menu" v-if="product.FoodAvailability == 'Yes'">
               <div class="hoverr">
                 <img
                   :src="getImageUrl(product.FoodImg)"

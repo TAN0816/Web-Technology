@@ -134,7 +134,7 @@ export default {
                console.log(response);
                console.log(formData.order);
                console.log(formData.address);
-               // window.location.href = "/user/MenuCart";
+               window.location.href = "/user/MenuCart";
             } else {
                const result = await response.json();
                alert('Failed to add order: ' + result.message);

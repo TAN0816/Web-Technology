@@ -308,7 +308,7 @@ body{
   height:auto;
   position:relative;
   animation: rotate 10s linear infinite;
-
+  border-radius: 400px;
 }
 
 /*===ANIMATION====*/
