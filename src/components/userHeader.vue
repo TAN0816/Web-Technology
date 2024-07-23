@@ -20,7 +20,7 @@
     <div class="account">
       <div class="dropdown">
         <img src="../assets/image/login.png" alt="login-pic" />
-        <p><router-link to="/profiledisplay" style="text-decoration: none; color: black;">Customer</router-link></p>
+        <p><span style="text-decoration: none; color: black;">Customer</span></p>
         <div class="dropdown-item">
           <button class="customerlogout" @click="logout"><i class="bi bi-box-arrow-left"></i><span>Log Out</span></button>
         </div>
