@@ -43,6 +43,7 @@
 
 
             <div class="orderDetails">
+                <div style="text-align: left; font-weight: 600; margin-bottom: 8px">Delivery Method: {{ orderInfo.delivery_method }}</div>
                 <table class="table table-hover">
                     <thead class="table-primary">
                         <tr>

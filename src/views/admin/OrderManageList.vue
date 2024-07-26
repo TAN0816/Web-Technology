@@ -27,6 +27,7 @@
                         <th scope="col">ID</th>
                         <th scope="col">Customer Name</th>
                         <th scope="col">Order Time</th>
+                        <th scope="col">Delivery Method</th>
                         <th scope="col">Status</th>
                         <th scope="col" colspan="2">Actions</th>
                     </tr>
@@ -39,6 +40,7 @@
                         <td>{{ order.order_ID }}</td>
                         <td>{{ order.customer_name }}</td>
                         <td>{{ order.cdate }}</td>
+                        <td>{{ order.delivery_method }}</td>
                         <td>{{ order.order_status }}</td>
                         <td class="view">
                             <a class="btn btn-outline-primary" :href="`/admin/orderDetail?orderId=${order.order_ID}`">View</a>
