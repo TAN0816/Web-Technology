@@ -21,7 +21,7 @@
 
       <!-- Display current or completed orders based on the selected tab -->
       <div class="order-details-content" v-show="currentTab === 'current'">
-        <table class="order-table" v-show="filteredCurrentOrders.length > 0">
+        <table class="order-table" v-if="filteredCurrentOrders.length > 0">
           <thead>
             <tr>
               <th>Order</th>
@@ -34,68 +34,12 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="order in filteredCurrentOrders" :key="order.order_ID">
-              <td>Order #{{ order.order_ID }}</td>
-              <td :style="{ color: getStatusColor(order.order_status) }">
-                <div class="button-like">{{ order.order_status }}</div>
-              </td>
-
-              <td>{{ order.cdate }}</td>
-              <td>{{ order.address }}</td>
-              <td>{{ "RM" + calculateTotal(order.items) }}</td>
-              <td>
-                {{
-                  order.payment_method.charAt(0).toUpperCase() +
-                  order.payment_method.slice(1)
-                }}
-              </td>
-              <td>
-                <i
-                  class="fas"
-                  :class="{
-                    'fa-chevron-down': !order.showDropdown,
-                    'fa-chevron-up': order.showDropdown,
-                  }"
-                  @click="toggleDropdown(order)"
-                ></i>
-              </td>
-            </tr>
-            <tr
-              v-show="order.showDropdown"
-              v-for="order in orders"
-              :key="order.order_ID + '-details'"
-            >
-              <td colspan="7">
-                <div class="order-details-dropdown">
-                  <div class="order-menu">
-                    <h5>Order Menu</h5>
-                    <table>
-                      <thead>
-                        <tr>
-                          <th>Food</th>
-                          <th>Qty</th>
-                          <th>Unit Price</th>
-                          <th>Price</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr v-for="item in order.items" :key="item.FoodID">
-                          <td>{{ item.FoodName }}</td>
-                          <td>{{ item.quantity }}</td>
-                          <td>{{ "RM" + item.FoodPrice }}</td>
-                          <td>{{ "RM" + item.price }}</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                  <div class="order-info">
-                    <div>
-                        <strong>Total: {{ "RM" + calculateTotal(order.items) }}</strong>
-                    </div>
-                  </div>
-                </div>
-              </td>
-            </tr>
+            <OrderRow
+              v-for="order in filteredCurrentOrders"
+              :key="order.order_ID"
+              :order="order"
+              @toggle-dropdown="toggleDropdown"
+            />
           </tbody>
         </table>
         <div v-show="filteredCurrentOrders.length === 0">
@@ -104,7 +48,7 @@
       </div>
 
       <div class="order-details-content" v-show="currentTab === 'completed'">
-        <table class="order-table" v-show="filteredCompletedOrders.length > 0">
+        <table class="order-table" v-if="filteredCompletedOrders.length > 0">
           <thead>
             <tr>
               <th>Order</th>
@@ -117,69 +61,12 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="order in filteredCompletedOrders" :key="order.order_ID">
-              <td>Order #{{ order.order_ID }}</td>
-              <td :style="{ color: getStatusColor(order.order_status) }">
-                <div class="button-like">{{ order.order_status }}</div>
-              </td>
-
-              <td>{{ order.cdate }}</td>
-              <td>{{ order.address }}</td>
-              <td>{{ "RM" + calculateTotal(order.items) }}</td>
-              <td>
-                {{
-                  order.payment_method.charAt(0).toUpperCase() +
-                  order.payment_method.slice(1)
-                }}
-              </td>
-
-              <td>
-                <i
-                  class="fas"
-                  :class="{
-                    'fa-chevron-down': !order.showDropdown,
-                    'fa-chevron-up': order.showDropdown,
-                  }"
-                  @click="toggleDropdown(order)"
-                ></i>
-              </td>
-            </tr>
-            <tr
-              v-show="order.showDropdown"
+            <OrderRow
               v-for="order in filteredCompletedOrders"
-              :key="order.order_ID + '-details'"
-            >
-              <td colspan="7">
-                <div class="order-details-dropdown">
-                  <div class="order-menu">
-                    <h5>Order Menu</h5>
-                    <table>
-                      <thead>
-                        <tr>
-                          <th>Food</th>
-                          <th>Qty</th>
-                          <th>Unit Price</th>
-                          <th>Price</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr v-for="item in order.items" :key="item.FoodID">
-                          <td>{{ item.FoodName }}</td>
-                          <td>{{ item.quantity }}</td>
-                          <td>{{ "RM" + item.FoodPrice }}</td>
-                          <td>{{ "RM" + item.price }}</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                  <div class="order-info">
-                    <div>
-                      <strong>Total: {{ "RM" + calculateTotal(order.items) }}</strong>
-                    </div>
-                  </div>
-                </div>
-              </td>
-            </tr>
+              :key="order.order_ID"
+              :order="order"
+              @toggle-dropdown="toggleDropdown"
+            />
           </tbody>
         </table>
         <div v-show="filteredCompletedOrders.length === 0">
@@ -191,73 +78,79 @@
 </template>
 
 <script>
-// import "@fortawesome/fontawesome-free/css/all.css";
+import OrderRow from './OrderRow.vue';
+import { jwtDecode } from 'jwt-decode';
 
 export default {
+  components: {
+    OrderRow,
+  },
   data() {
     return {
-      currentTab: "current",
+      currentTab: 'current',
       orders: [],
     };
   },
   computed: {
     filteredCurrentOrders() {
-      return this.orders.filter((order) => order.order_status !== "Delivered");
+      return this.orders.filter(order => order.order_status !== 'Delivered');
     },
     filteredCompletedOrders() {
-      return this.orders.filter((order) => order.order_status === "Delivered");
+      return this.orders.filter(order => order.order_status === 'Delivered');
     },
   },
   methods: {
     toggleDropdown(order) {
       order.showDropdown = !order.showDropdown;
+      if (this.currentTab === 'completed') {
+        this.resetCompletedOrderDropdowns();
+      }
     },
     fetchOrders() {
-      const userId = localStorage.getItem('userid');
-      fetch(`http://localhost:8080/orders/${userId}`)
-        .then((response) => response.json())
-        .then((data) => {
-          this.orders = data.map((order) => ({
-            ...order,
-            showDropdown: false,
-          }));
+      const token = localStorage.getItem('jwtToken');
+      if (!token) {
+        console.error('No token found');
+        return;
+      }
+
+      try {
+        const decodedToken = jwtDecode(token);
+        const userId = decodedToken.data.userId;
+
+        fetch(`http://localhost:8080/orders/${userId}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
         })
-        .catch((error) => {
-          console.error("Error fetching orders:", error);
-        });
-    },
-    calculateTotal(items) {
-      let total = 0;
-      items.forEach((item) => {
-        total += parseFloat(item.price);
-      });
-      return total.toFixed(2);
+          .then(response => response.json())
+          .then(data => {
+            if (data.success === false) {
+              console.error('Failed to fetch orders:', data.message);
+            } else {
+              this.orders = data;
+            }
+          })
+          .catch(error => {
+            console.error('Error fetching orders:', error);
+          });
+      } catch (error) {
+        console.error('Error decoding token:', error);
+      }
     },
     resetCompletedOrderDropdowns() {
-      this.filteredCompletedOrders.forEach((order) => {
+      this.filteredCompletedOrders.forEach(order => {
         order.showDropdown = false;
       });
-    },
-    getStatusColor(status) {
-      if (status === "Delivered") {
-        return "#28a745"; // Color for Delivered status
-      } else {
-        return "#ffc107"; // Color for other statuses
-      }
     },
   },
   mounted() {
     this.fetchOrders();
   },
-  watch: {
-    currentTab(newTab, oldTab) {
-      if (newTab !== oldTab && newTab === "current") {
-        this.resetCompletedOrderDropdowns();
-      }
-    },
-  },
 };
 </script>
+
 
 <style scoped>
 .order-details-container {

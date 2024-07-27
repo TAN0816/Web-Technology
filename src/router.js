@@ -75,6 +75,11 @@ const routes = [
 		name: "Profile",
 		component: Profile,
 	},
+	{
+		path: "/profile",
+		name: "Profile",
+		component: Profile,
+	},
 ];
 const router = createRouter({
 	history: createWebHistory(process.env.BASE_URL),
