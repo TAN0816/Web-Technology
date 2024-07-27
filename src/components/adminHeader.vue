@@ -11,8 +11,8 @@
         </ul>
         <div class="account">
             <div class="dropdown">
-                <img src="../assets/image/login.png" alt="login-pic" />
-                <p>Admin</p>
+                <img src="../assets/image/login.png" alt="login-pic" @click="goToProfile" />
+                <p @click="goToProfile"><span style="text-decoration: none; color: black;">Admin</span></p>
 
                 <div class="dropdown-item">
                     <button class="adminlogout" @click="logout"><i class="bi bi-box-arrow-left"></i><span>Log
@@ -26,6 +26,9 @@
 <script>
 export default {
   methods: {
+    goToProfile() {
+      this.$router.push('/profile');
+    },
     logout() {
       localStorage.removeItem('role');
       localStorage.removeItem('userid');

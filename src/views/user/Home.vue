@@ -1,6 +1,5 @@
 <template>
   <div class="home-wrapper">
-
     <section>
       <div class="grid">
         <div class="content">
@@ -24,18 +23,18 @@
       <div class="list-items">
         <h3>Popular Dishes</h3>
         <div class="card-list">
-          <div class="card" v-for="(dish, index) in dishes" :key="index">
-            <img :src="dish.image" :alt="dish.title">
+          <div class="card" v-for="(dish, index) in popularDishes" :key="index">
+            <img :src="getImageUrl(dish.FoodImg)" :alt="dish.FoodName">
             <div class="food-title">
-              <h1>{{ dish.title }}</h1>
+              <h1>{{ dish.FoodName }}</h1>
             </div>
             <div class="desc-food">
-              <p>{{ dish.description }}</p>
+              <p>{{ dish.FoodDescription }}</p>
             </div>
             <div class="price">
-              <span>{{ dish.price }}</span>
+              <span>RM{{ dish.FoodPrice }}</span>
               <span>
-                <i class='bx bxs-star icon-col' v-for="star in 3" :key="star"></i>
+                <i class='bx bxs-star icon-col' v-for="star in dish.rating" :key="star"></i>
               </span>
             </div>
           </div>
@@ -50,40 +49,38 @@ export default {
   name: 'HomeWrapper',
   data() {
     return {
-      dishes: [
-        {
-          title: "Fluffy Delight Pancakes",
-          description: "Incredibly light, airy, and soft, creating a delightful melt-in-your-mouth experience with every bite.",
-          price: "RM 18.00",
-          image: require('@/assets/image/food2.jpg')
-        },
-        {
-          title: "Satay Chicken Vege",
-          description: "Experience the richness of our Lobster Bisque. This velvety soup is crafted with the finest lobster meat.",
-          price: "RM 18.00",
-          image: require('@/assets/image/food3.jpg')
-        },
-        {
-          title: "Oat Chicken Moroccan Salad",
-          description: "Delicious baked chicken coated with oats then it is glazed by hot sauce.",
-          price: "RM 18.00",
-          image: require('@/assets/image/food4.jpg')
-        },
-        {
-          title: "Pesto Salmon Vege",
-          description: "Fresh aroma with a subtle of peppery flavor sweet basil with olive oil and garlic coated salmon.",
-          price: "RM 23.00",
-          image: require('@/assets/image/food5.jpg')
-        }
-      ]
-    }
+      popularDishes: []
+    };
   },
   methods: {
     menu() {
       window.location.href = "./login.php";
+    },
+    fetchPopularDishes() {
+      fetch('http://localhost:8080/popular_dashboardfood')
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.json();
+        })
+        .then(data => {
+          this.popularDishes = data;
+        })
+        .catch(error => {
+          console.error('There was an error fetching the popular dishes!', error);
+        });
+    },
+    getImageUrl(imageName) {
+      // return imgPath; // Ensure this path is accessible from the frontend
+      return require('../../assets/image/food/' + imageName)
     }
+  },
+  mounted() {
+    this.fetchPopularDishes();
   }
-}
+};
+
 </script>
 
 <style scoped>
@@ -309,6 +306,7 @@ body{
   height:auto;
   position:relative;
   animation: rotate 10s linear infinite;
+  border-radius: 400px;
 
 }
 
@@ -370,7 +368,7 @@ body{
 .category .card-list .card img{
   width:100px;
   height:100px;
-  bottom:200px;
+  bottom:225px;
   left:50px;
   object-fit:cover;
   object-position:center;
@@ -400,8 +398,8 @@ body{
 }
 
 .category .card .price{
-  display: flex;
-  align-items: center;
+  /* display: flex;
+  align-items: center; */
   justify-content: space-between;
 
 }

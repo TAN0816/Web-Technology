@@ -194,7 +194,6 @@ export default {
             }
         },
         getImageUrl(imageName) {
-            // Assuming your images are stored in the 'assets/image/food' directory
             return require('../../assets/image/food/' + imageName);
         },
         handleNewFileUpload(event) {
@@ -220,7 +219,6 @@ export default {
                         showConfirmButton: true
                     });
                     this.getAllMenuItems();
-                    // window.location.href = "/admin/menuManage"
                     // Clear form fields
                     this.newFoodName = '';
                     this.newFoodDescription = '';
@@ -261,7 +259,6 @@ export default {
                         showConfirmButton: true
                     });
                     this.getAllMenuItems();
-                    // window.location.href = '/admin/menuManage';
                 } else {
                     Swal.fire({
                         icon: "error",
